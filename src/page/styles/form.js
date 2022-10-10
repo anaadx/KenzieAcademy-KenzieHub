@@ -39,6 +39,7 @@ export const TextAlert = styled.p`
   border-radius: 5px;
   width: fit-content;
   max-height: min-content;
+  margin-bottom: 5px;
 `;
 
 export const Label = styled.label`
@@ -58,7 +59,7 @@ export const Input = styled.input`
   border: solid 1px var(--grey2);
   padding: 15px;
   background-color: var(--grey2);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;

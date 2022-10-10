@@ -58,14 +58,22 @@ function Login() {
           placeholder="digite aqui seu email"
           {...register("email")}
         />
-        {errors.email?.message}
+         {errors.email ? (
+          <Form.TextAlert>{errors.email.message}</Form.TextAlert>
+        ) : (
+          ""
+        )}
         <Form.Label htmlFor="password">Senha</Form.Label>
         <Form.Input
           id="password"
           placeholder="digite aqui sua senha"
           {...register("password")}
         />
-        {errors.password?.message}
+         {errors.password ? (
+          <Form.TextAlert>{errors.password.message}</Form.TextAlert>
+        ) : (
+          ""
+        )}
         <Form.MainButton mode="one">Entrar</Form.MainButton>
         <Form.Text1Form className="headlineBold">
           Ainda não possui uma conta?
