@@ -1,0 +1,10 @@
+body {
+  max-width: 100vw;
+  height: 100vh;
+  background-color: var(--grey4);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
