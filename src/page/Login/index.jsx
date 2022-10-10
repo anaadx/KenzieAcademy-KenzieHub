@@ -39,7 +39,7 @@ function Login() {
           window.localStorage.setItem("userData", JSON.stringify(response.data.user));
           window.localStorage.setItem("userId", JSON.stringify(response.data.user.id));
           window.localStorage.setItem("userToken", JSON.stringify(response.data.token));
-          navegate("/");
+          navegate("/dashboard");
         })
         .catch((error) =>{
           console.log((error))

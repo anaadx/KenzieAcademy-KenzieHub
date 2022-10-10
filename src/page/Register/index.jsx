@@ -21,15 +21,21 @@ function Register() {
   const formSchema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
     email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
-    password: yup.string().required("Senha obrigatória"),
-    // .matches("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/", "senha inválida")
+    password: yup
+    .string()
+    .required("Senha obrigatória")
+    .min(8, "Deve contar no mínimo 8 caracteres")
+    .matches(/[0-9]/, "Deve conter ao menos um número")
+    .matches(/[a-z]/, "Deve conter ao menos uma letra minúscula")
+    .matches(/[A-Z]/, "Deve conter ao menos uma letra maiúscula")
+    .matches(/[^\w]/, "Deve conter ao meno sum caractere especial"),
     confirmPassword: yup
-      .string()
-      .required("Repita sua senha"),
+    .string()
+    .oneOf([yup.ref("password"), null], "As senhas devem ser iguais"),
     contact: yup
       .string()
       .required("Contato obrigatório"),
-      course_module: yup.string().required("Selecione seu módulo"),
+      course_module: yup.string().required("Selecione o seu módulo"),
   });
 
   const {
