@@ -27,7 +27,7 @@ function Register() {
       .matches(/[0-9]/, "Deve conter ao menos um número")
       .matches(/[a-z]/, "Deve conter ao menos uma letra minúscula")
       .matches(/[A-Z]/, "Deve conter ao menos uma letra maiúscula")
-      .matches(/[^\w]/, "Deve conter ao meno sum caractere especial"),
+      .matches(/[^\w]/, "Deve conter ao menos um caractere especial"),
     confirmPassword: yup
       .string()
       .required("Confirme sua senha")
