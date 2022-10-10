@@ -30,6 +30,17 @@ export const Text1Form = styled.p`
   margin-bottom: 15px;
 `;
 
+export const TextAlert = styled.p`
+  background-color: var(--negative);
+  color: var(--grey4);
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  width: fit-content;
+  max-height: min-content;
+`;
+
 export const Label = styled.label`
   color: white;
   align-self: flex-start;
