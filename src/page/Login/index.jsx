@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Form from "../styles/form";
 import * as Header from "../styles/header";
@@ -6,8 +6,7 @@ import * as C from "./styles";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import api from "../../services/api";
-import toast from "react-hot-toast";
+import { AuthContext } from "../../context/AuthContext";
 
 function Login() {
   const navegate = useNavigate();
@@ -30,22 +29,7 @@ function Login() {
     resolver: yupResolver(formSchema),
   });
 
-  function onSubmitLogin(data) {
-    console.log(data)
-        api.post(`/sessions`, data)
-        .then((response) => {
-          console.log(response)
-          toast.success("Login realizado com sucesso")
-          window.localStorage.setItem("userData", JSON.stringify(response.data.user));
-          window.localStorage.setItem("userId", JSON.stringify(response.data.user.id));
-          window.localStorage.setItem("userToken", JSON.stringify(response.data.token));
-          navegate("/dashboard");
-        })
-        .catch((error) =>{
-          console.log((error))
-          toast.error("Você nao pode realizar o login");
-        })
-  }
+  const {onSubmitLogin} = useContext(AuthContext)
 
   return (
     <C.Container>
@@ -64,7 +48,8 @@ function Login() {
           ""
         )}
         <Form.Label htmlFor="password">Senha</Form.Label>
-        <Form.Input
+        <Form.Input 
+          type="password"
           id="password"
           placeholder="digite aqui sua senha"
           {...register("password")}

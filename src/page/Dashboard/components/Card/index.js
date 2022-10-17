@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import * as C from "./styles";
+import { BsTrash } from 'react-icons/bs';
+import { TechContext } from '../../../../context/TechContext';
 
-function Card() {
+function Card({tech}) {
+
+  const {onDeleteTechnology} = useContext(TechContext)
+
   return (
     <C.Li>
-    <C.TituloCard>titulo</C.TituloCard>
+    <C.TituloCard>{tech.title}</C.TituloCard>
     <C.DivLevel>
-        <C.Text>teste</C.Text>
+        <C.Text>{tech.status}</C.Text>
+        <BsTrash className='lixeira' onClick={() => {
+          onDeleteTechnology(tech.id)}}/>
     </C.DivLevel>
     </C.Li>
   )

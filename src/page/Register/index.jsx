@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Form from "../styles/form";
 import * as Header from "../styles/header";
@@ -6,8 +6,7 @@ import * as C from "./styles";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import api from "../../services/api";
-import toast from "react-hot-toast";
+import { AuthContext } from "../../context/AuthContext";
 
 function Register() {
   const navegate = useNavigate();
@@ -45,20 +44,7 @@ function Register() {
     resolver: yupResolver(formSchema),
   });
 
-  function onSubmitRegister(data) {
-    console.log(data);
-    api
-      .post(`/users`, data)
-      .then((response) => {
-        console.log(response);
-        toast.success("Registrado com sucesso!");
-        navegate("/login");
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Requisição negada");
-      });
-  }
+  const {onSubmitRegister} = useContext(AuthContext)
 
   return (
     <C.Container>

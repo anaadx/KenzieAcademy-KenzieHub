@@ -34,9 +34,9 @@ export const TextAlert = styled.p`
   background-color: var(--negative);
   color: var(--grey4);
   font-weight: bold;
-  font-size: 16px;
-  padding: 10px 15px;
-  border-radius: 5px;
+  font-size: 12px;
+  padding: 5px 5px;
+  border-radius: 3px;
   width: fit-content;
   max-height: min-content;
   margin-bottom: 5px;

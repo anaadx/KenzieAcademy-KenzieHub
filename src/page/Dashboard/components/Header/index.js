@@ -7,7 +7,9 @@ function HeaderDash() {
 
   function backToLogin(event) {
     event.preventDefault();
-    window.localStorage.clear()
+    window.localStorage.removeItem("userToken")
+    window.localStorage.removeItem("userId")
+    window.localStorage.removeItem("userData")
     navegate("/login");
   }
 
