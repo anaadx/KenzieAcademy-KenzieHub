@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import * as Form from "../styles/form";
 import * as Header from "../styles/header";
 import * as C from "./styles";
@@ -9,12 +8,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { AuthContext } from "../../context/AuthContext";
 
 function Register() {
-  const navegate = useNavigate();
-
-  function backToLogin(event) {
-    event.preventDefault();
-    navegate("/login");
-  }
 
   const formSchema = yup.object().shape({
     name: yup.string().required("Nome obrigatório"),
@@ -50,9 +43,9 @@ function Register() {
     <C.Container>
       <Header.Div>
         <Header.TitleMain>Kenzie Hub</Header.TitleMain>
-        <Header.ButtonSecondary type="button" onClick={backToLogin}>
+        <Header.ButtonSecondaryLink to={"./login"}>
           Sair
-        </Header.ButtonSecondary>
+        </Header.ButtonSecondaryLink>
       </Header.Div>
       <Form.Container onSubmit={handleSubmit(onSubmitRegister)}>
         <Form.Title1Form className="title1">Crie sua conta</Form.Title1Form>

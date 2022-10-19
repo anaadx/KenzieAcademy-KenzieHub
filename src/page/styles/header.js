@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
@@ -53,6 +54,27 @@ export const ButtonSecondary = styled.button`
   font-weight: 600;
   font-size: 12px;
   color: white;
+  &:hover {
+    background-color: var(--grey1);
+  }
+`;
+
+export const ButtonSecondaryLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  padding: 0px 15px;
+  height: 30px;
+  border: none;
+  color: white;
+  background-color: var(--grey3);
+  border-radius: 5px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
   &:hover {
     background-color: var(--grey1);
   }

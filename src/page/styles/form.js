@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 export const Container = styled.form`
@@ -92,6 +93,37 @@ export const MainButton = styled.button`
   color: white;
   background-color: var(--colorPrimary);
   width: 100%;
+  margin-bottom: 25px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  ${({ mode }) => {
+    if (mode === "one") {
+      return css`
+        &:hover {
+          background-color: var(--colorPrimaryFocus);
+        }
+      `;
+    } else if (mode === "two") {
+      return css`
+        background-color: var(--colorPrimaryNegative);
+      `;
+    }
+  }}
+`;
+
+export const MainButtonLink = styled(Link)`
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: var(--colorPrimary);
+  align-self: center;
+  width: 91%;
   margin-bottom: 25px;
   font-family: "Inter";
   font-style: normal;
