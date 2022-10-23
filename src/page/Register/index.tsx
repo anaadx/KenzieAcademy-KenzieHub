@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
 import * as Form from "../styles/form";
 import * as Header from "../styles/header";
 import * as C from "./styles";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { AuthContext } from "../../context/AuthContext";
+import { IRegisterData , useAuthContext } from "../../context/AuthContext";
 
 function Register() {
 
@@ -33,11 +32,11 @@ function Register() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<IRegisterData>({
     resolver: yupResolver(formSchema),
   });
 
-  const {onSubmitRegister} = useContext(AuthContext)
+  const {onSubmitRegister} = useAuthContext()
 
   return (
     <C.Container>

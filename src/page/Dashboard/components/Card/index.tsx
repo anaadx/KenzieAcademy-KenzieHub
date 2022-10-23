@@ -1,11 +1,20 @@
-import React, { useContext } from 'react'
 import * as C from "./styles";
 import { BsTrash } from 'react-icons/bs';
-import { TechContext } from '../../../../context/TechContext';
+import { useTechContext } from '../../../../context/TechContext';
 
-function Card({tech}) {
+interface ICardProps {
+    title: string;
+    status: string;
+    id: string;
+}
 
-  const {onDeleteTechnology} = useContext(TechContext)
+interface ITech {
+  tech: ICardProps;
+}
+
+function Card({tech}: ITech) {
+
+  const {onDeleteTechnology} = useTechContext()
 
   return (
     <C.Li>

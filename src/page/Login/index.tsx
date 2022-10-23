@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
 import * as Form from "../styles/form";
 import * as Header from "../styles/header";
 import * as C from "./styles";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { AuthContext } from "../../context/AuthContext";
+import { ILoginData, useAuthContext } from "../../context/AuthContext";
 
 function Login() {
 
@@ -18,11 +17,11 @@ function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<ILoginData>({
     resolver: yupResolver(formSchema),
   });
 
-  const {onSubmitLogin} = useContext(AuthContext)
+  const {onSubmitLogin} = useAuthContext()
 
   return (
     <C.Container>

@@ -1,11 +1,12 @@
 import React from 'react'
+import { IUserData } from '../../../../context/AuthContext';
 
 import * as C from "./styles";
 
 function Welcome() {
    
-  let userDataBefore = localStorage.getItem("userData");
-  let userData = JSON.parse(userDataBefore);
+  let userDataBefore: any = localStorage.getItem("userData");
+  let userData: IUserData = JSON.parse(userDataBefore)
 
   return (
     <C.Container>

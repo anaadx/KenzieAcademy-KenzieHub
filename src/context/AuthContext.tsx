@@ -1,15 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useContext, useEffect, useState } from 'react';
 import { createContext } from "react";
 import api from '../services/api';
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
+interface IAuthContext {
+  onSubmitRegister(data: IRegisterData): void; 
+  onSubmitLogin(data: ILoginData): void;
+  user: IUserData | null;
+  loading: any;
+}
 
-export const AuthContext = createContext({})
+interface IAuthProviderProps {
+  children: ReactNode;
+}
 
-function AuthProvider({children}) {
+
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext)
+
+
+export interface IUserData{
+  id: string,
+  name: string,
+  email: string,
+  course_module: string,
+  bio: string,
+  contact: string ,
+  techs: [],
+  works: [],
+  created_at: number,
+  updated_at: number,
+  avatar_url: null
+}
+
+export interface IRegisterData {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  bio: string;
+  contact: string;
+  course_module: string;
+}
+
+export interface ILoginData {
+  email: string;
+  password: string;
+}
+
+function AuthProvider({children}: IAuthProviderProps) {
     const [user, setUser] = useState(null) 
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState<boolean>(true)
 
     const navegate = useNavigate();
 
@@ -38,7 +79,9 @@ function AuthProvider({children}) {
         loadUser();
       }, [user]);
     
-   async function onSubmitRegister(data) {
+
+
+   async function onSubmitRegister(data: IRegisterData) {
         console.log(data);
 
         try {
@@ -53,7 +96,7 @@ function AuthProvider({children}) {
         }
       }
 
-      async function onSubmitLogin(data) {
+      async function onSubmitLogin(data: ILoginData) {
         
 
         try {
@@ -82,5 +125,11 @@ function AuthProvider({children}) {
     </AuthContext.Provider>
   )
 }
+
+export function useAuthContext(): IAuthContext {
+  const context = useContext(AuthContext)
+
+  return context
+};
 
 export default AuthProvider

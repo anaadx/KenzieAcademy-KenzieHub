@@ -1,14 +1,14 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../../../../context/AuthContext";
+import React, { useState } from "react";
+import { useAuthContext } from "../../../../context/AuthContext";
 import Card from "../Card";
 import Modal from "../Modal";
 import * as C from "./styles";
 
 function List() {
-  const [isModal, setIsModal] = useState(false);
-  const { user } = useContext(AuthContext)
+  const [isModal, setIsModal] = useState<boolean>(false);
+  const { user } = useAuthContext()
 
-  function handleModal() {
+  function handleModal(): void {
     setIsModal(!isModal);
   }
 
@@ -29,10 +29,10 @@ function List() {
         </C.Button>
       </C.ContainerText>
       <C.Container>
-      {user.techs.map((tech) => {
+      {user?.techs.map((tech) => {
             return (
               <Card  
-                key={tech.title}
+                key={tech}
                 tech={tech}
               />
             );

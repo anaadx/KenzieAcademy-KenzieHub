@@ -3,8 +3,7 @@ import * as Header from "../../../styles/header";
 
 function HeaderDash() {
 
-  function backToLogin(event) {
-    event.preventDefault();
+  function backToLogin(): void {
     window.localStorage.removeItem("userToken")
     window.localStorage.removeItem("userId")
     window.localStorage.removeItem("userData")

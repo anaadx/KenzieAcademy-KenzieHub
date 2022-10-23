@@ -1,4 +1,3 @@
-import React from "react"
 import {Route, Routes} from "react-router-dom"
 import Dash from "../page/Dashboard"
 import Login from "../page/Login"

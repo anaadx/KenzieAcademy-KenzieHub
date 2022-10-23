@@ -1,23 +1,23 @@
-import React, { useContext } from 'react'
 import * as C from "./styles";
 import * as Form from "../../../styles/form";
 import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { TechContext } from '../../../../context/TechContext';
+import {  useTechContext } from '../../../../context/TechContext';
+import { IRegisterData } from '../../../../context/TechContext';
 
-function Modal({handleModal}) {
+function Modal({handleModal}: any) {
 
     const formSchema = yup.object().shape({
         title: yup.string().required("Nome obrigatório"),
         status: yup.string().required("Selecione um status"),
       });
     
-      const {register, handleSubmit, formState: {errors}} = useForm({
+      const {register, handleSubmit, formState: {errors}} = useForm<IRegisterData>({
         resolver: yupResolver(formSchema)
        })
 
-       const {onSubmitTechnology} = useContext(TechContext)
+       const {onSubmitTechnology} = useTechContext()
     
   return (
     <C.ContainerModal>

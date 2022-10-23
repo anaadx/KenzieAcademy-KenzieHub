@@ -86,7 +86,11 @@ export const Select = styled.select`
   }
 `;
 
-export const MainButton = styled.button`
+interface IButtonMainProps {
+  mode: string;
+}
+
+export const MainButton = styled.button<IButtonMainProps>`
   padding: 15px;
   border: none;
   border-radius: 5px;
@@ -113,7 +117,7 @@ export const MainButton = styled.button`
   }}
 `;
 
-export const MainButtonLink = styled(Link)`
+export const MainButtonLink = styled(Link)<IButtonMainProps>`
   text-decoration: none;
   display: flex;
   justify-content: center;
