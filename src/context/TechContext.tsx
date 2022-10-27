@@ -19,14 +19,14 @@ export interface IRegisterData {
 }
 
 function TechProvider({ children }: ITechProviderProps) {
-  async function onSubmitTechnology(data: IRegisterData) {
-    console.log(data);
+  async function onSubmitTechnology(registerData: IRegisterData) {
+    console.log(registerData);
 
     const token = localStorage.getItem("userToken");
 
     try {
       api.defaults.headers.authorization = `Bearer ${token}`;
-      const response = await api.post(`/users/techs`, data);
+      const response = await api.post<{}>(`/users/techs`, registerData);
       console.log(response);
       toast.success("Registrada com sucesso!");
     } catch (error) {
@@ -41,7 +41,7 @@ function TechProvider({ children }: ITechProviderProps) {
 
     try {
       api.defaults.headers.authorization = `Bearer ${token}`;
-      const response = await api.delete(`/users/techs/${id}`);
+      const response = await api.delete<{}>(`/users/techs/${id}`);
       console.log(response);
       toast.success("Deletada com sucesso!");
     } catch (error) {

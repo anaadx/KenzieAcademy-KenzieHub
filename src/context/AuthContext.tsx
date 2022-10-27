@@ -15,7 +15,6 @@ interface IAuthProviderProps {
   children: ReactNode;
 }
 
-
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext)
 
 
@@ -49,7 +48,7 @@ export interface ILoginData {
 }
 
 function AuthProvider({children}: IAuthProviderProps) {
-    const [user, setUser] = useState(null) 
+    const [user, setUser] = useState<IUserData | null>(null) 
     const [loading, setLoading] = useState<boolean>(true)
 
     const navegate = useNavigate();
@@ -62,7 +61,7 @@ function AuthProvider({children}: IAuthProviderProps) {
             try {
               api.defaults.headers.authorization = `Bearer ${token}`;
     
-              const { data } = await api.get('/profile');
+              const { data } = await api.get<IUserData>('/profile');
     
               setUser(data);
             } catch (error) {
@@ -81,12 +80,11 @@ function AuthProvider({children}: IAuthProviderProps) {
     
 
 
-   async function onSubmitRegister(data: IRegisterData) {
-        console.log(data);
+   async function onSubmitRegister(dataRegister: IRegisterData) {
 
         try {
-            const response = await api.post(`/users`, data)
-            console.log(response)
+            const {data} = await api.post<IUserData>(`/users`, dataRegister)
+            console.log(data)
             toast.success("Registrado com sucesso!");
             navegate("/login");
             
@@ -96,22 +94,27 @@ function AuthProvider({children}: IAuthProviderProps) {
         }
       }
 
-      async function onSubmitLogin(data: ILoginData) {
+      interface ILoginResponse{
+        user: IUserData;
+        token: string
+      }
+
+      async function onSubmitLogin(dataLogin: ILoginData) {
         
 
         try {
-            const response = await api.post(`/sessions`, data)
+            const {data} = await api.post<ILoginResponse>(`/sessions`, dataLogin)
             
             toast.success("Login realizado com sucesso")
-            window.localStorage.setItem("userData", JSON.stringify(response.data.user));
-            window.localStorage.setItem("userId", response.data.user.id);
-            window.localStorage.setItem("userToken", response.data.token);
+            window.localStorage.setItem("userData", JSON.stringify(data.user));
+            window.localStorage.setItem("userId", data.user.id);
+            window.localStorage.setItem("userToken", data.token);
+            console.log(data)
             navegate("/dashboard", {replace: true});
 
-            api.defaults.headers.authorization = `Bearer ${response.data.token}`
+            api.defaults.headers.authorization = `Bearer ${data.token}`
 
-            const {user: userResponse} = response.data
-            setUser(userResponse)
+            setUser(data.user)
             
         } catch (error) {
             console.log(error)
